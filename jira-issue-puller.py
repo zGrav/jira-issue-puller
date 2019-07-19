@@ -1,4 +1,4 @@
-boardUrl = "https://eslgaming.atlassian.net"
+boardUrl = ""
 
 boardId = 6 # you can get the id after selection a project and during board seletion. e.g RapidBoard.jspa?rapidView=6
 
@@ -25,7 +25,7 @@ def tryUrl(req: urllib.request.Request):
     try: urllib.request.urlopen(req)
     except urllib.error.URLError as e:
         print(e.reason)
-        exit
+        exit()
 
 def getSprint():
     activeSprintReq = urllib.request.Request(activeSprintUrl, None, authHeader)
@@ -56,11 +56,11 @@ sprint = getSprint()
 
 if(not board):
     print("no board found :(")
-    exit
+    exit()
 
 if(not sprint):
-    print("no sprint found :(")
-    exit
+    print("no active sprint found :(")
+    exit()
 else:
     sprintName = sprint['name']
     sprintUrl = sprint['self']
@@ -82,12 +82,16 @@ else:
         for issue in issues:
             isSubTask = issue['fields']['issuetype']['subtask']
 
-            if(isSubTask):
+            if isSubTask:
                 continue
             else:
+                if issue['fields']['issuetype']['name'] == 'Story':
+                    issueKey = issue['fields']['issuetype']['name'].upper() + ' - ' + issue['key']
+                else:
+                    issueKey = issue['key']
+
                 issueStatus = issue['fields']['status']['name']
 
-                issueKey = issue['key']
                 issueName = issue['fields']['summary']
 
                 issueTag = issueKey + ': ' + issueName
