@@ -102,7 +102,7 @@ else:
                     todoIssues.append(issueTag)
                 elif issueStatus == 'In Progress' or issueStatus == 'In Review':
                     inProgressOrReviewIssues.append(issueTag)
-                elif issueStatus == 'Done' or issueStatus == 'Resolved':
+                elif issueStatus == 'Done' or issueStatus == 'Resolved' or issueStatus == 'Closed':
                     doneOrResolvedIssues.append(issueTag)
 
 print()
