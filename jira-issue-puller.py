@@ -99,11 +99,20 @@ else:
                 issueTag = issueKey + ': ' + issueName
 
                 if issueStatus == 'To Do':
-                    todoIssues.append(issueTag)
+                    if issue['fields']['issuetype']['name'] == 'Story' and not len(issueSubtasks) == 0:
+                        todoIssues.insert(0, issueTag)
+                    else:
+                        todoIssues.append(issueTag)
                 elif issueStatus == 'In Progress' or issueStatus == 'In Review':
-                    inProgressOrReviewIssues.append(issueTag)
+                    if issue['fields']['issuetype']['name'] == 'Story' and not len(issueSubtasks) == 0:
+                        inProgressOrReviewIssues.insert(0, issueTag)
+                    else:
+                        inProgressOrReviewIssues.append(issueTag)
                 elif issueStatus == 'Done' or issueStatus == 'Resolved' or issueStatus == 'Closed':
-                    doneOrResolvedIssues.append(issueTag)
+                    if issue['fields']['issuetype']['name'] == 'Story' and not len(issueSubtasks) == 0:
+                        doneOrResolvedIssues.insert(0, issueTag)
+                    else:
+                        doneOrResolvedIssues.append(issueTag)
 
 print()
 print("Grand total of:")
