@@ -68,7 +68,7 @@ else:
     boardName = board['name']
     projectName = board['location']['name']
 
-    sprintTasksReq = urllib.request.Request(sprintUrl + '/issue?fields=name,issuetype,summary,status,assignee&maxResults=200', None, authHeader) # bump up is neede, iirc max is 500
+    sprintTasksReq = urllib.request.Request(sprintUrl + '/issue?fields=name,issuetype,summary,status,assignee&maxResults=200', None, authHeader) # bump up if needed, iirc max is 500
 
     tryUrl(sprintTasksReq)
 
